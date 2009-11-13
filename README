@@ -2,4 +2,4 @@ Confused?
 
 Try this:
 nasm clockyboot.s
-qemu -fad clockyboot
+qemu -fda clockyboot
