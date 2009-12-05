@@ -18,18 +18,14 @@ void k_putch(char character, char attr){
 	if(character==13){//CR
 		cursor_x=0;
 	}
-	if(character==10){//LF
+	else if(character==10){//LF
 		cursor_y++;
-		if(cursor_y >= terminal_height){
+		if(cursor_y > terminal_height){
 			cursor_y=terminal_height;
 			scroll();
 		}
 	}
-	*vid_mem=character;
-        ++(*vid_mem)=attr;
-	
-
-	if(cursor_x >= terminal_width){
+	else if(cursor_x >= terminal_width){
 		cursor_x=0;
 		cursor_y++;
 		if(cursor_y >= terminal_height){
@@ -37,7 +33,17 @@ void k_putch(char character, char attr){
 			scroll();
 		}
 	}
-
+	else if(cursor_y >= terminal_height){
+		cursor_y=terminal_height;
+		scroll();
+	}
+	
+	if(character!=10 || character !=13){
+	//Actually get around to outputing the character
+		*vid_mem=character;
+		*(++vid_mem)=attr;
+		cursor_x++;
+	}
 }
 
 /* C needs default arguements :-( */
