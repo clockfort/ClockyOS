@@ -40,7 +40,7 @@ void k_putchar(char character, char attr){
 		scroll();
 	}
 	
-	if(character!=10 || character !=13){
+	if(character!=10 && character !=13){
 	//Actually get around to outputing the character
 		*vid_mem=character;
 		*(++vid_mem)=attr;
