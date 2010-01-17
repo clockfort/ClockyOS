@@ -3,9 +3,9 @@ bits 16
 %define SIZE 50 		;#sectors kernel takes up
 	
 start:
-        mov ax,0x7c0
-        mov ds,ax
-	mov es,ax
+        mov ax,0x7c0	;
+        mov ds,ax 	;
+	mov es,ax	;Address where the BIOS dumped us.
 	mov ax,0x8000		;C stack
 	mov ss,ax
 	mov sp,0xf000
@@ -38,30 +38,14 @@ start:
 	int 0x13
 	pop es
 
-	;; Frenchman's code to load a Global Descriptor Table
-; initialisation du pointeur sur la GDT
-    mov ax, gdtend    ; calcule la limite de GDT
-    mov bx, gdt
-    sub ax, bx
-    mov word [gdtptr], ax
-
-    xor eax, eax      ; calcule l'adresse lineaire de GDT
-    xor ebx, ebx
-    mov ax, ds
-    mov ecx, eax
-    shl ecx, 4
-    mov bx, gdt
-    add ecx, ebx
-    mov dword [gdtptr+2], ecx
-
-; passage en modep
+; Protected Mode (But first, a GDT!)
     cli
-    lgdt [gdtptr]    ; charge la gdt
+    lgdt [gdt_metadata]    ; charge la gdt
     mov eax, cr0
-    or  ax, 1
+    or  al, 1
     mov cr0, eax        ; PE mis a 1 (CR0)
+    jmp next;
 
-    jmp next
 next:
     mov ax, 0x10        ; segment de donne
     mov ds, ax
@@ -79,18 +63,15 @@ boot_msg    db '| ClockBoot Started |',0
 endl	    db 13,10,0
 drive:	    db 0
 
-gdt:
-    db 0, 0, 0, 0, 0, 0, 0, 0
-gdt_cs:
+gdt_metadata:
+    dw gdt_end - gdt_start -1; end of gdt's address
+    dd gdt_start
+gdt_start:
+    dd 0,0
+gdt_middle:
+;   limit_low, limit_high, base_1, base_2, base3, type, flags, base_4
     db 0xFF, 0xFF, 0x0, 0x0, 0x0, 10011011b, 11011111b, 0x0
-gdt_ds:
-    db 0xFF, 0xFF, 0x0, 0x0, 0x0, 10010011b, 11011111b, 0x0
-gdtend:
-;--------------------------------------------------------------------
-gdtptr:
-    dw 0  ; limite
-    dd 0  ; base
-;--------------------------------------------------------------------
+gdt_end:
 
 puts:
 	lodsb
