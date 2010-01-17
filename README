@@ -1,5 +1,1 @@
-Confused?
-
-Try this:
-nasm clockyboot.s
-qemu -fda clockyboot
+Use "make" to compile source code, link, and create bootable disk images.
