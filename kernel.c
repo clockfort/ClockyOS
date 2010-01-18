@@ -1,15 +1,19 @@
 #include "vid_colortext.h"
+#include "hw_interrupt.h"
 
 void kmain( void* mbd, unsigned int magic )
 {
   if ( magic != 0x2BADB002 ){
-      k_puts("Bad multibood magic! Email devnull@csh.rit.edu if you got here on an unmodified kernel.\r\n");
+      k_puts("Bad multiboot magic! Email devnull@csh.rit.edu if you got here on an unmodified kernel.\r\n");
       while(1){}
   }
  
   k_clr();
-  k_puts("Video Mode Color Text Driver Online\r\n");
-  k_cputs("Gentoo mode enabled!\r\n", dec_term_color );
-  k_cputs("BSOD?\r\n", bsod_color ); 
+  k_cputs("Initialized color textmode video driver.\r\n", bsod_color );
+
+  k_puts("Setting up hardware interrupts (Shifting PIC offsets)... ");
+  //hw_interrupt_shift();
+  k_cputs(" done!\r\n", bsod_color);
+  
   while(1){}
 }
