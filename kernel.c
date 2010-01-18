@@ -9,11 +9,16 @@ void kmain( void* mbd, unsigned int magic )
   }
  
   k_clr();
-  k_cputs("Initialized color textmode video driver.\r\n", bsod_color );
-
-  k_puts("Setting up hardware interrupts (Shifting PIC offsets)... ");
+  k_cputs(" >>", green_on_black);
+  k_puts("Initialized color textmode video driver.\r\n");
+  k_cputs("*", green_on_black);
+  k_puts("Setting up hardware interrupts (Shifting PIC offsets)...     ");
   hw_interrupt_shift();
-  k_cputs(" done!\r\n", bsod_color);
+
+  k_cputs("[",blue_on_black);
+  k_cputs(" ok ", green_on_black);
+  k_cputs("]\r\n",blue_on_black);
   
   while(1){}
 }
+

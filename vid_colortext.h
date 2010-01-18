@@ -3,6 +3,8 @@
 #define terminal_color 0x07
 #define bsod_color 0x1f
 #define dec_term_color 0x2a
+#define green_on_black 0x02
+#define blue_on_black 0x01
 
 #define terminal_width 80
 #define terminal_height 25
