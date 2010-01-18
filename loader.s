@@ -1,3 +1,4 @@
+[BITS 32]
 global loader           	; making entry point visible to linker
 	extern kmain            ; kmain is defined elsewhere
 

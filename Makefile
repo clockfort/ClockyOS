@@ -5,8 +5,8 @@ floppyA: kernel grub/stage1 grub/stage2 grub/pad
 	cat grub/stage1 grub/stage2 grub/pad kernel.bin > floppy.img 	
 	@echo -e "Boot with: \n   kernel 200+`ls -s --block-size=512 kernel.bin`\n   boot"
 
-kernel: kernel.o loader.o vid_colortext.o
-	ld -melf_i386 -T linker.ld -o kernel.bin loader.o kernel.o vid_colortext.o
+kernel: kernel.o loader.o vid_colortext.o hw_interrupt.o
+	ld -melf_i386 -T linker.ld -o kernel.bin loader.o kernel.o vid_colortext.o hw_interrupt.o
 
 kernel.o: kernel.c 
 	$(CC) -m32 -o kernel.o -c kernel.c -Wall -Wextra -nostdlib -nostartfiles -nodefaultlibs 
