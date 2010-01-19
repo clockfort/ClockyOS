@@ -5,6 +5,7 @@
 void cpuid_string();
 void cpuid_get_features();
 
+//As per CPU Features manual at: http://sandpile.org/ia32/cpuid.htm
 struct cpu_features_ecx{
 unsigned int stuff_I_dont_care_about: 11;
 unsigned char SSE42: 1;
@@ -25,7 +26,7 @@ unsigned char SSE2: 1;
 unsigned char SSE: 1;
 unsigned char FXSR: 1;
 unsigned char MMX: 1;
-unsigned char still_dont_care: 22;
+unsigned int still_dont_care: 22;
 unsigned char FPU: 1;
-}
+};
 #endif
