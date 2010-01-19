@@ -18,4 +18,5 @@ void k_cputch(char character, char attr);
 void k_putch(char c);
 void k_puts(char *string);
 void k_cputs(char *string, char attr);
+void k_set_cursor_x(char x);
 #endif

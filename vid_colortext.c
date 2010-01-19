@@ -80,3 +80,7 @@ void k_cputs(char *string, char attr){
 		++string;
 	}
 }
+
+void k_set_cursor_x(char x){
+	cursor_x=x;
+}

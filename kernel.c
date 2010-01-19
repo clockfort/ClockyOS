@@ -1,4 +1,5 @@
 #include "vid_colortext.h"
+#include "vid_boottext.h"
 #include "hw_interrupt.h"
 
 void kmain( void* mbd, unsigned int magic )
@@ -9,15 +10,10 @@ void kmain( void* mbd, unsigned int magic )
   }
  
   k_clr();
-  k_cputs(" >>", green_on_black);
-  k_puts("Initialized color textmode video driver.\r\n");
-  k_cputs("*", green_on_black);
-  k_puts("Setting up hardware interrupts (Shifting PIC offsets)...     ");
+  k_print_msg("Initialized color textmode video driver.");
+  k_module_start_print("Setting up hardware interrupts (Shifting PIC offsets)...");
   hw_interrupt_shift();
-
-  k_cputs("[",blue_on_black);
-  k_cputs(" ok ", green_on_black);
-  k_cputs("]\r\n",blue_on_black);
+  k_module_start_print_done();
   
   while(1){}
 }
