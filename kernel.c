@@ -1,6 +1,7 @@
 #include "vid_colortext.h"
 #include "vid_boottext.h"
 #include "hw_interrupt.h"
+#include "hw_cpuid.h"
 
 void kmain( void* mbd, unsigned int magic )
 {
@@ -14,7 +15,11 @@ void kmain( void* mbd, unsigned int magic )
   k_module_start_print("Setting up hardware interrupts (Shifting PIC offsets)...");
   hw_interrupt_shift();
   k_module_start_print_done();
+  k_module_start_print("Getting Processor Information...");
+  k_module_start_print_done();
+  cpuid_string();
   
+  k_print_msg("Ending kernel execution with a spinlock...");
   while(1){}
 }
 

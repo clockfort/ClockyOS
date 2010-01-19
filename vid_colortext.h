@@ -5,6 +5,7 @@
 #define dec_term_color 0x2a
 #define green_on_black 0x02
 #define blue_on_black 0x01
+#define red_on_black 0x04
 
 #define terminal_width 80
 #define terminal_height 25
