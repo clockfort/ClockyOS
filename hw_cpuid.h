@@ -17,22 +17,26 @@ unsigned char speedstep: 1;
 unsigned char yep_dont_care: 6;
 unsigned char SSE3: 1;
 } cpu_features_ecx;
+
+typedef struct {
+unsigned char stuff_I_dont_care_about: 3;
+unsigned char hyperthreading: 1;
+unsigned char selfsnoop: 1;
+unsigned char SSE2: 1;
+unsigned char SSE: 1;
+unsigned char FXSR: 1;
+unsigned char MMX: 1;
+unsigned int still_dont_care: 6;
+unsigned char PAT: 1;
+unsigned char guess_what_dont_care: 6;
+unsigned char APIC: 1;
+unsigned char dont_care_captain: 2;
+unsigned char PAE: 1;
+unsigned char yep_dont_care: 5;
+unsigned char FPU: 1;
+} cpu_features_edx;
 /*
 typedef struct {
-unsigned char stuff_I_dont_care_about: 3;
-unsigned char hyperthreading: 1;
-unsigned char selfsnoop: 1;
-unsigned char SSE2: 1;
-unsigned char SSE: 1;
-unsigned char FXSR: 1;
-unsigned char MMX: 1;
-unsigned int still_dont_care: 13;
-unsigned char APIC: 1;
-unsigned char yep_dont_care: 8;
-unsigned char FPU: 1;
-} cpu_features_edx;
-*/
-typedef struct {
 unsigned char FPU: 1;
 unsigned char yep_dont_care: 8;
 unsigned char APIC: 1;
@@ -44,5 +48,5 @@ unsigned char SSE2: 1;
 unsigned char selfsnoop: 1;
 unsigned char hyperthreading: 1;
 unsigned char stuff_I_dont_care_about: 3;
-} cpu_features_edx;
+} cpu_features_edx;*/
 #endif

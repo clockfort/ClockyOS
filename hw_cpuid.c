@@ -15,7 +15,10 @@ void cpuid_get_features(){
 	char type=1;
 	asm volatile("cpuid":"=a"(word[0]),"=b"(word[1]),"=c"(word[2]),"=d"(word[3]):"0"(type));
 	cpu_features_edx edx;
+	cpu_features_ecx ecx;
 	*((int *)(&edx)) = word[3];
+	*((int *)(&ecx)) = word[2];
+
 	if(edx.hyperthreading){
 		k_print_msg("Hyperthreading Supported");
 	}
@@ -31,8 +34,17 @@ void cpuid_get_features(){
 	if(edx.APIC){
 		k_print_msg("APIC Supported");
 	}
+	if(edx.FXSR){
+		k_print_msg("FXSR Supported");
+	}
 	if(edx.FPU){
 		k_print_msg("FPU Supported");
+	}
+	if(edx.PAT){
+		k_print_msg("PAT Supported");
+	}
+	if(edx.PAE){
+		k_print_msg("PAE Supported");
 	}
 
 }
