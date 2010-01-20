@@ -13,12 +13,12 @@ void kmain( void* mbd, unsigned int magic )
   k_clr();
   k_print_msg("Initialized color textmode video driver.");
   k_module_start_print("Setting up hardware interrupts (Shifting PIC offsets)...");
-  hw_interrupt_shift();
+  //hw_interrupt_shift();
   k_module_start_print_done();
   k_module_start_print("Getting Processor Information...");
   k_module_start_print_done();
   cpuid_string();
-  
+  cpuid_get_features();
   k_print_msg("Ending kernel execution with a spinlock...");
   while(1){}
 }
