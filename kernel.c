@@ -2,6 +2,7 @@
 #include "vid_boottext.h"
 #include "hw_interrupt.h"
 #include "hw_cpuid.h"
+#include "k_panic.h"
 
 void kmain( void* mbd, unsigned int magic )
 {
@@ -19,7 +20,6 @@ void kmain( void* mbd, unsigned int magic )
   k_module_start_print_done();
   cpuid_string();
   cpuid_get_features();
-  k_print_msg("Ending kernel execution with a spinlock...");
-  while(1){}
+  k_panic("Ending kernel execution with a spinlock...");
 }
 
