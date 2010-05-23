@@ -3,7 +3,7 @@ The easiest way to see what's up is to just run the latest floppy.img, I keep it
 Compile Instructions:
 You need gcc, ld, make, and nasm to compile.
 Use "make" to compile source code, link, and create bootable disk images.
-After it has compiled succesfully (cross your fingers, this is a project I work on in my super-spare-free-time-for-funsies) you can boot it.
+After it has compiled succesfully (cross your fingers, this is a project I work on in my super-spare-free-time-for-funsies-every-six-months-for-a-weekend) you can boot it.
 
 Booting the image:
 You'll want an x86 emulator (QEMU is easy to use, free, and lightweight) to run the resulting disk image.
@@ -11,4 +11,4 @@ qemu -fda "floppy.img"
 Once you hit the grub prompt, type in something like:
    kernel 200+24 kernel.bin
    boot
-except, the 200+24 part will change based on how large certain binaries are, but make will tell you how to boot the image.
+except, the 200+24 part will change based on how large certain binaries are, but make (or just "make instructions") will tell you how to boot the image.

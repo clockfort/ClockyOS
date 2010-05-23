@@ -31,3 +31,6 @@ k_panic.o: k_panic.c
 
 clean:
 	rm -f *.o *.bin
+
+instructions:
+	@echo -e "Boot with: \n   kernel 200+`ls -s --block-size=512 kernel.bin`\n   boot"
