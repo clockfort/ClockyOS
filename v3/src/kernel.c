@@ -27,6 +27,7 @@ ISR(TIMER0_OVF_vect){
 		}
 		if(proc_timer>=122){
 			proc_timer=0;
+			send_str_from_ram("Ping!\r\n");
 		}
 }
 

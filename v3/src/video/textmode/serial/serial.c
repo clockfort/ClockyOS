@@ -56,6 +56,15 @@ void send_str(const char *s)
 	}
 }
 
+void send_str_from_ram(const char *s){
+	char c;
+	while(1){
+		c = *s++;
+		if(!c) break;
+		usb_serial_putchar(c);
+	}
+}
+
 // Receive a string from the USB serial port.  The string is stored
 // in the buffer and this function will not exceed the buffer size.
 // A carriage return or newline completes the string, and is not
