@@ -33,6 +33,7 @@ void initialize_serial(){
 	_delay_ms(1000);
 	block_on_host();
 	usb_serial_flush_input();
+	_delay_ms(1500); //Give the terminal emulator some startup time
 }
 
 uint8_t host_is_ready(){

@@ -3,6 +3,8 @@ TARGET = kernel
 
 # List C source files here. (C dependencies are automatically generated.)
 SRC =	$(TARGET).c \
+	scheduler.c \
+	io/led/led.c \
 	video/textmode/serial/serial.c \
 	video/textmode/serial/usb_serial.c
 

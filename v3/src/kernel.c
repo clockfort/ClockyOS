@@ -15,45 +15,24 @@
 */
 
 #include "kernel.h"
+#include "scheduler.h"
 #include "video/textmode/serial/serial.h"
-
-ISR(TIMER0_OVF_vect){
-		++proc_timer;
-		if(proc_timer<=61){
-			LED_ON;
-		}
-		else{
-			LED_OFF;
-		}
-		if(proc_timer>=122){
-			proc_timer=0;
-			send_str_from_ram("Ping!\r\n");
-		}
-}
+#include "io/led/led.h"
 
 int main(void)
 {
 	// set for 16 MHz clock
 	CPU_PRESCALE(0);
 	
-	initialize_serial();	
-	//Configure LED port
-	LED_CONFIG;
-	LED_OFF;
-	
-	//Set CPU clock divider to ~61Hz
-	TCCR0B |= _BV(CS02) | _BV(CS00);
+	initialize_serial();
+	send_str(PSTR("Initialized serial communications.\r\n"));
+	initialize_led();
+	send_str(PSTR("Initialized LED I/O.\r\n"));
 
-	//Interrupt on timer0 overflow
-	TIMSK0 |= _BV(TOIE0);
-
-	proc_timer=0;
-	TCNT0 = 0;
-
-	//Enable interrupts
-	sei();
-	
-	//Set washer to spin cycle
+	send_str(PSTR("Starting process scheduler..."));
+	initialize_scheduler();	
+	send_str(PSTR("    ... done.\r\n"));
+		
 	while(1){
 	}
 }
