@@ -14,15 +14,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
-
-#define LED_CONFIG	(DDRD |= (1<<6))
-#define LED_OFF		(PORTD &= ~(1<<6))
-#define LED_ON		(PORTD |= (1<<6))
-#define CPU_PRESCALE(n)	(CLKPR = 0x80, CLKPR = (n))
-
-volatile uint8_t proc_timer;
+#include "kernel.h"
+#include "video/textmode/serial/serial.h"
 
 ISR(TIMER0_OVF_vect){
 		++proc_timer;
@@ -42,6 +35,7 @@ int main(void)
 	// set for 16 MHz clock
 	CPU_PRESCALE(0);
 	
+	initialize_serial();	
 	//Configure LED port
 	LED_CONFIG;
 	LED_OFF;

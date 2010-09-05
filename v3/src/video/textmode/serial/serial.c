@@ -27,7 +27,7 @@
  * if there was no connected USB host. We will block at host_is_ready()
  * if the USB host isn't ready to recieve (aka doesn't have a terminal emulator running) 
  */
-void initialize(){
+void initialize_serial(){
 	usb_init();
 	while (!usb_configured()) /* wait */ ;
 	_delay_ms(1000);

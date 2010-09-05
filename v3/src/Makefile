@@ -1,50 +1,10 @@
-# Hey Emacs, this is a -*- makefile -*-
-#----------------------------------------------------------------------------
-# WinAVR Makefile Template written by Eric B. Weddington, Jörg Wunsch, et al.
-#
-# Released to the Public Domain
-#
-# Additional material for this makefile was written by:
-# Peter Fleury
-# Tim Henigan
-# Colin O'Flynn
-# Reiner Patommel
-# Markus Pfaff
-# Sander Pool
-# Frederik Rouleau
-# Carlos Lamas
-#
-#----------------------------------------------------------------------------
-# On command line:
-#
-# make all = Make software.
-#
-# make clean = Clean out built project files.
-#
-# make coff = Convert ELF to AVR COFF.
-#
-# make extcoff = Convert ELF to AVR Extended COFF.
-#
-# make program = Download the hex file to the device, using avrdude.
-#                Please customize the avrdude settings below first!
-#
-# make debug = Start either simulavr or avarice as specified for debugging, 
-#              with avr-gdb or avr-insight as the front end for debugging.
-#
-# make filename.s = Just compile filename.c into the assembler code only.
-#
-# make filename.i = Create a preprocessed source file for use in submitting
-#                   bug reports to the GCC project.
-#
-# To rebuild project do "make clean" then "make all".
-#----------------------------------------------------------------------------
-
-
 # Target file name (without extension).
 TARGET = kernel
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC =	$(TARGET).c 
+SRC =	$(TARGET).c \
+	video/textmode/serial/serial.c \
+	video/textmode/serial/usb_serial.c
 
 
 # MCU name, you MUST set this to match the board you are using
@@ -443,6 +403,10 @@ gccversion :
 program: $(TARGET).hex $(TARGET).eep
 	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
 
+# Program the device using (command line) Halfkay/Teensy Loader USB method
+usb-load: $(TARGET).hex
+	@echo "Please reset device into teensy loader mode"
+	teensy_loader_cli -mmcu=$(MCU) -w $(TARGET).hex
 
 # Generate avr-gdb config/init file which does the following:
 #     define the reset signal, load the target file, connect to target, and set 
